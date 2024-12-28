@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+
+{% block main %}
+  <div class="row row-cols-1 row-cols-md-12 g-4">
+    <div class="d-flex flex-row-reverse">
+      <a href="{% url 'update_lesson' post.pk %}"><i class="fas fa-pen"></i></a>
+    </div>
+
+      <div class="col my_col">
+  <div class="card h-100">
+      {% if post.photo %}
+    <img src="{{ post.photo.url }}" class="card-img-top" alt="Palm Springs Road"/>
+      {% else %}
+      <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/042.webp" class="card-img-top" alt="Palm Springs Road"/>
+      {% endif %}
+    <div class="card-body">
+      <h5 class="card-title">{{ post.title }}</h5>
+      <p class="card-text">
+        {{ post.content|linebreaks }}
+      </p>
+    </div>
+    <div class="card-footer d-flex justify-content-between">
+      <small class="text-muted">{{ post.created|date:"D d F Y" }} {{ post.created|time:"H:i" }}</small>
+      <small class="text-muted">{{ post.views }}</small>
+      <small class="text-muted">
+        <a href="{% url 'posts_by_category' post.category.pk %}">{{ post.category.name }}</a>
+      </small>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock main %}
